@@ -29,7 +29,7 @@ def select_model():
     else :
         model = load_svc_model()
     
-    encoder = joblib.load("./models/label_encoder.pkl")
+    encoder = joblib.load("./models/preprocessor.pkl")
     
     return model, encoder
 
