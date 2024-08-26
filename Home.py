@@ -27,7 +27,7 @@ st.markdown( """
    -The result include metrics like accuracy,precision,recall,and f1-score*    
             """)
 # menu
-st.subheader("App features")
+st.subheader("App Features")
 st.markdown("""
         - **view Data** : Access proprietary data
         - **Dashboard** : Explore inactive data visualization for insights
