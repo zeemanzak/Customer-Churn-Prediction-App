@@ -68,14 +68,23 @@ def make_prediction(model,encoder):
                       "MonthlyCharges", "TotalCharges"]
     
     # Create a DataFrame
-    df = pd.DataFrame(data=[features], columns=feature_names)  
+    df = pd.DataFrame(data=[features], columns=feature_names)
+    
+    # Get the expected feature names from the encoder
+    expected_feature_names = encoder.get_feature_names_out()
+    
+     # Reorder DataFrame columns to match the order used during model training
+    #df = df[encoder.get_feature_names_out()]
+       # Transform the DataFrame to match the expected order and names
+    df_encoded = pd.DataFrame(encoder.transform(df), columns=expected_feature_names)
+    
      # Ensure the data is properly encoded
-    df_encoded = pd.DataFrame(encoder.transform(df).toarray(), columns=encoder.get_feature_names_out())
+    # df_encoded = pd.DataFrame(encoder.transform(df), columns=encoder.get_feature_names_out())
     
     # Check the shape of df_encoded
-    if df_encoded.shape[0] != 1:
+    # if df_encoded.shape[0] != 1:
         # Reshape if necessary
-        df_encoded = df_encoded.reshape(1, -1)
+        # df_encoded = df_encoded.reshape(1, -1)
     
     # Make prediction
     pred = model.predict(df_encoded)
